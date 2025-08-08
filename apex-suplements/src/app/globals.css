@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+:root {
+  /* Apex Nutrition Brand Colors */
+  --apex-red: #e11d48;
+  --apex-gold: #facc15;
+  --apex-black: #18181b;
+  --apex-white: #ffffff;
+  --apex-gray: #f1f5f9;
+
+  /* Performance Colors */
+  --performance-blue: #3b82f6;
+  --energy-orange: #f97316;
+  --recovery-green: #10b981;
+
+  /* Background & Text */
+  --background: #ffffff;
+  --foreground: #18181b;
+
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-backdrop: blur(16px);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-roboto-slab);
+
+  /* Apex Custom Colors */
+  --color-apex-red: var(--apex-red);
+  --color-apex-gold: var(--apex-gold);
+  --color-apex-black: var(--apex-black);
+  --color-performance-blue: var(--performance-blue);
+  --color-energy-orange: var(--energy-orange);
+  --color-recovery-green: var(--recovery-green);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --glass-bg: rgba(0, 0, 0, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Glass Morphism Utility Classes */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+}
+
+/* Gradient Animations */
+.gradient-apex {
+  background: linear-gradient(135deg, var(--apex-red), var(--apex-gold));
+}
+
+.gradient-performance {
+  background: linear-gradient(135deg, var(--performance-blue), var(--apex-red));
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(225, 29, 72, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(225, 29, 72, 0.6); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Dropdown Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mind Map Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-draw {
+  animation: draw 2s ease-out forwards;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.animate-shine {
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
