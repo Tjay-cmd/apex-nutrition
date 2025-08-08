@@ -50,7 +50,7 @@ const CustomerList: React.FC = () => {
   // Debounced search
   useEffect(() => {
     const id = setTimeout(() => {
-      setFilters({ ...filters, search: searchTerm || undefined, page: 1 } as any);
+      setFilters({ ...filters, search: searchTerm || undefined });
       setPagination({ ...pagination, page: 1 });
       fetchCustomers();
     }, 400);
@@ -70,7 +70,7 @@ const CustomerList: React.FC = () => {
   };
 
   const applySort = () => {
-    setSort({ field: sortField as any, direction: sortDir });
+    setSort({ field: sortField as unknown as typeof sort.field, direction: sortDir });
     setPagination({ ...pagination, page: 1 });
     fetchCustomers();
   };
