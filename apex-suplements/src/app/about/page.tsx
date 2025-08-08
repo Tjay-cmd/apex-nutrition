@@ -303,7 +303,7 @@ export default function AboutPage() {
                            </div>
                           <div>
                             <h3 className="text-xl font-bold text-gray-900">2012</h3>
-                                                         <p className="text-orange-600 font-semibold">First Product</p>
+                                                         <p className="text-apex-red font-semibold">First Product</p>
                           </div>
                         </div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-2">Breakthrough Formulation</h4>
@@ -327,7 +327,7 @@ export default function AboutPage() {
                            </div>
             <div>
                             <h3 className="text-xl font-bold text-gray-900">2015</h3>
-                                                         <p className="text-yellow-600 font-semibold">Clinical Validation</p>
+                                                         <p className="text-apex-red font-semibold">Clinical Validation</p>
                           </div>
                         </div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-2">Human Clinical Trials</h4>
@@ -355,7 +355,7 @@ export default function AboutPage() {
                            </div>
                   <div>
                             <h3 className="text-xl font-bold text-gray-900">2018</h3>
-                                                         <p className="text-gray-600 font-semibold">Research Excellence</p>
+                                                         <p className="text-apex-red font-semibold">Research Excellence</p>
                           </div>
                         </div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-2">100+ Publications</h4>
@@ -379,7 +379,7 @@ export default function AboutPage() {
                 </div>
                   <div>
                             <h3 className="text-xl font-bold text-gray-900">2020</h3>
-                                                         <p className="text-gray-600 font-semibold">Global Reach</p>
+                                                         <p className="text-apex-red font-semibold">Global Reach</p>
                           </div>
                         </div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-2">Worldwide Expansion</h4>
