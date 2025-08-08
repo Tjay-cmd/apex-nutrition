@@ -166,10 +166,14 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
                 <Button
                   onClick={() => handleQuickAdd(product)}
                   disabled={product.stock <= 0}
-                  className="w-full bg-gradient-to-r from-apex-red to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="relative overflow-hidden w-full bg-apex-red hover:bg-[#c5153f] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-apex-red/30"
                 >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+                  {/* Shine overlay */}
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-[-12deg] animate-shine" />
+                  <span className="relative z-10 inline-flex items-center justify-center">
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+                  </span>
                 </Button>
               </div>
 
