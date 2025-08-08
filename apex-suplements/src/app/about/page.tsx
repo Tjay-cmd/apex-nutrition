@@ -130,8 +130,8 @@ export default function AboutPage() {
                                                    {/* Quote Section */}
                           <div className="lg:w-1/2 p-6 lg:p-8 bg-gradient-to-br from-gray-100 to-gray-50 h-80 lg:h-96 flex flex-col justify-center">
                             <div className="flex items-start space-x-3 mb-4">
-                              <div className="w-10 h-10 bg-gradient-to-br from-apex-red to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                <Quote className="h-5 w-5 text-white" />
+                              <div className="w-10 h-10 bg-white rounded-full border-2 border-apex-red flex items-center justify-center flex-shrink-0">
+                                <Quote className="h-5 w-5 text-apex-red" />
                               </div>
                               <div>
                                 <h4 className="font-semibold text-gray-900 text-lg">Prof. Dr. Du Toit Loots</h4>
