@@ -36,14 +36,18 @@ service cloud.firestore {
       allow read, write: if request.auth != null;
     }
 
-    // Products collection - admin access only
+    // Products collection
+    // Public reads (homepage, shop, product pages). Writes require auth.
     match /products/{productId} {
-      allow read, write: if request.auth != null;
+      allow read: if true;
+      allow write: if request.auth != null;
     }
 
-    // Categories collection - admin access only
+    // Categories collection
+    // Public reads for filtering/navigation. Writes require auth.
     match /categories/{categoryId} {
-      allow read, write: if request.auth != null;
+      allow read: if true;
+      allow write: if request.auth != null;
     }
 
     // Default rule - deny all other access
