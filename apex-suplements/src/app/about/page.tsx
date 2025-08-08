@@ -260,12 +260,8 @@ export default function AboutPage() {
             <div ref={mindMapRef} className="relative max-w-6xl mx-auto">
               {/* Timeline Container */}
               <div className="relative">
-                                 {/* Timeline Line */}
-                 <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-apex-red via-red-800 to-black h-full rounded-full z-10"></div>
-                 {/* Light shine effect overlay */}
-                 <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full rounded-full overflow-hidden z-20">
-                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-shine"></div>
-                 </div>
+                 {/* Timeline Line (solid red) */}
+                 <div className="absolute left-1/2 -translate-x-1/2 w-1 bg-apex-red h-full rounded-full z-10"></div>
 
                 {/* Timeline Items */}
                 <div className="space-y-16">
@@ -298,12 +294,12 @@ export default function AboutPage() {
                   {/* 2012 - First Product */}
                   <div className={`relative flex items-center transition-all duration-1000 ${mindMapVisible ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`} style={{ transitionDelay: mindMapVisible ? '0.4s' : '0s' }}>
                     <div className="w-1/2 pr-8"></div>
-                                         <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-700 rounded-full border-4 border-white shadow-lg"></div>
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-apex-red rounded-full border-4 border-white shadow-lg"></div>
                     <div className="w-1/2 pl-8">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center mb-4">
-                                                     <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mr-4">
-                             <TestTube className="h-6 w-6 text-white" />
+                                                      <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4">
+                             <TestTube className="h-6 w-6 text-apex-red" />
                            </div>
                           <div>
                             <h3 className="text-xl font-bold text-gray-900">2012</h3>
@@ -326,8 +322,8 @@ export default function AboutPage() {
                     <div className="w-1/2 pr-8 text-right">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center justify-end mb-4">
-                                                     <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4 shadow-lg">
-                             <Microscope className="h-6 w-6 text-white" />
+                                                      <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4 shadow-lg">
+                             <Microscope className="h-6 w-6 text-apex-red" />
                            </div>
             <div>
                             <h3 className="text-xl font-bold text-gray-900">2015</h3>
@@ -343,19 +339,19 @@ export default function AboutPage() {
                         </div>
                       </div>
                     </div>
-                                         <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-800 rounded-full border-4 border-white shadow-lg"></div>
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-apex-red rounded-full border-4 border-white shadow-lg"></div>
                     <div className="w-1/2 pl-8"></div>
                   </div>
 
                   {/* 2018 - Research Excellence */}
                   <div className={`relative flex items-center transition-all duration-1000 ${mindMapVisible ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`} style={{ transitionDelay: mindMapVisible ? '0.8s' : '0s' }}>
                     <div className="w-1/2 pr-8"></div>
-                                         <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gray-700 rounded-full border-4 border-white shadow-lg"></div>
+                                          <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-apex-red rounded-full border-4 border-white shadow-lg"></div>
                     <div className="w-1/2 pl-8">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center mb-4">
-                                                     <div className="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full flex items-center justify-center mr-4">
-                             <Award className="h-6 w-6 text-white" />
+                                                      <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4">
+                             <Award className="h-6 w-6 text-apex-red" />
                            </div>
                   <div>
                             <h3 className="text-xl font-bold text-gray-900">2018</h3>
@@ -378,8 +374,8 @@ export default function AboutPage() {
                     <div className="w-1/2 pr-8 text-right">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center justify-end mb-4">
-                                                     <div className="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center mr-4">
-                             <Globe className="h-6 w-6 text-white" />
+                                                      <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4">
+                             <Globe className="h-6 w-6 text-apex-red" />
                 </div>
                   <div>
                             <h3 className="text-xl font-bold text-gray-900">2020</h3>
@@ -395,19 +391,19 @@ export default function AboutPage() {
                         </div>
                       </div>
                     </div>
-                                         <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gray-800 rounded-full border-4 border-white shadow-lg"></div>
+                                          <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-apex-red rounded-full border-4 border-white shadow-lg"></div>
                     <div className="w-1/2 pl-8"></div>
                   </div>
 
                   {/* 2023 - Elite Partnerships */}
                   <div className={`relative flex items-center transition-all duration-1000 ${mindMapVisible ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`} style={{ transitionDelay: mindMapVisible ? '1.2s' : '0s' }}>
                     <div className="w-1/2 pr-8"></div>
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-black rounded-full border-4 border-white shadow-lg"></div>
+                     <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-apex-red rounded-full border-4 border-white shadow-lg"></div>
                     <div className="w-1/2 pl-8">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center mb-4">
-                                                     <div className="w-12 h-12 bg-gradient-to-br from-apex-red to-orange-600 rounded-full flex items-center justify-center mr-4">
-                             <Users className="h-6 w-6 text-white" />
+                                                      <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4">
+                             <Users className="h-6 w-6 text-apex-red" />
                 </div>
                   <div>
                             <h3 className="text-xl font-bold text-gray-900">2023</h3>
