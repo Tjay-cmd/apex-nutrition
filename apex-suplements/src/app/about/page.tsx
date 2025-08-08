@@ -201,8 +201,8 @@ export default function AboutPage() {
             }`}>
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-8">
-                                      <div className="w-20 h-20 bg-gradient-to-br from-apex-red to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                      <Play className="h-10 w-10 text-white" />
+                  <div className="w-20 h-20 bg-white border-2 border-apex-red rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <Play className="h-10 w-10 text-apex-red" />
                     </div>
                   <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
                     Hear From Our Founder
