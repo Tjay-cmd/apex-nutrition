@@ -274,9 +274,9 @@ export default function AboutPage() {
                     <div className="w-1/2 pr-8 text-right">
                       <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center justify-end mb-4">
-                                                     <div className="w-12 h-12 bg-gradient-to-br from-apex-red to-orange-600 rounded-full flex items-center justify-center mr-4">
-                             <Trophy className="h-6 w-6 text-white" />
-                           </div>
+                          <div className="w-12 h-12 bg-white rounded-full border-2 border-apex-red flex items-center justify-center mr-4">
+                            <Trophy className="h-6 w-6 text-apex-red" />
+                          </div>
                           <div>
                             <h3 className="text-xl font-bold text-gray-900">2010</h3>
                             <p className="text-apex-red font-semibold">Foundation</p>
