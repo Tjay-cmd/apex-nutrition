@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Shield, Zap, Star, BadgeCheck, Award as AwardIcon, Shield as ShieldIcon, ScrollText } from 'lucide-react';
+import { Shield, Zap, Star, BadgeCheck, Award as AwardIcon, ScrollText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getFeaturedProducts, formatZAR } from '@/lib/firebase-queries';
 import HeroSlideshow from '@/components/home/hero-slideshow';
@@ -137,23 +137,20 @@ export default async function HomePage() {
             </div>
 
             <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
-              {[
-                { code: 'GMP', title: 'GMP Certified', caption: 'Manufacturing', Icon: BadgeCheck },
-                { code: 'NSF', title: 'NSF Certified', caption: 'Quality Assurance', Icon: AwardIcon },
-                { code: 'WADA', title: 'WADA Compliant', caption: 'Anti-Doping', Icon: ShieldIcon },
-                { code: 'ISO', title: 'ISO 9001', caption: 'Quality Management', Icon: ScrollText },
-              ].map(({ code, title, caption, Icon }) => (
-                <div key={code} className="text-center">
+              {([
+                { key: 'gmp', title: 'GMP Certified', caption: 'Manufacturing', Icon: BadgeCheck },
+                { key: 'nsf', title: 'NSF Certified', caption: 'Quality Assurance', Icon: AwardIcon },
+                { key: 'wada', title: 'WADA Compliant', caption: 'Anti-Doping', Icon: Shield },
+                { key: 'iso', title: 'ISO 9001', caption: 'Quality Management', Icon: ScrollText },
+              ] as { key: string; title: string; caption: string; Icon: React.ElementType }[]).map(({ key, title, caption, Icon }) => (
+                <div key={key} className="text-center">
                   <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#e11d48] to-black text-white flex items-center justify-center mx-auto mb-3 shadow-lg">
                     <div className="absolute inset-0 rounded-full overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full animate-shine" />
-                </div>
-                    <span className="relative z-10 font-bold text-xs md:text-sm">{code}</span>
-              </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Icon className="h-4 w-4 text-apex-red" aria-hidden="true" />
-                    <p className="text-sm font-semibold text-gray-900">{title}</p>
+                    </div>
+                    <Icon className="relative z-10 h-5 w-5 md:h-6 md:w-6 text-white" aria-hidden="true" />
                   </div>
+                  <p className="text-sm font-semibold text-gray-900">{title}</p>
                   <p className="text-xs text-gray-500">{caption}</p>
                 </div>
               ))}
