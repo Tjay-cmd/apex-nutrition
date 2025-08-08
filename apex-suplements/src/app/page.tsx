@@ -122,48 +122,38 @@ export default async function HomePage() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Trust & Quality Assurance
-              </h3>
-              <p className="text-gray-600">
-                Our commitment to excellence is backed by industry-leading certifications and partnerships
+          <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-10 md:p-12">
+            <div className="text-center mb-10">
+              <div className="flex items-center justify-center mb-5">
+                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#e11d48] to-black mr-4" />
+                <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900">
+                  Trust & Quality Assurance
+                </h3>
+                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#e11d48] to-black ml-4" />
+              </div>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Our commitment to excellence is backed by industry‑leading certifications and partnerships
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-green-600 font-bold text-sm">GMP</span>
+            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
+              {[
+                { code: 'GMP', title: 'GMP Certified', caption: 'Manufacturing' },
+                { code: 'NSF', title: 'NSF Certified', caption: 'Quality Assurance' },
+                { code: 'WADA', title: 'WADA Compliant', caption: 'Anti-Doping' },
+                { code: 'ISO', title: 'ISO 9001', caption: 'Quality Management' },
+              ].map((item) => (
+                <div key={item.code} className="text-center">
+                  <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#e11d48] to-black text-white flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <div className="absolute inset-0 rounded-full overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full animate-shine" />
+                    </div>
+                    <span className="relative z-10 font-bold text-xs md:text-sm">{item.code}</span>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900">{item.title}</p>
+                  <p className="text-xs text-gray-500">{item.caption}</p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">GMP Certified</p>
-                <p className="text-xs text-gray-500">Manufacturing</p>
-              </div>
-
-              <div className="text-center">
-                <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-blue-600 font-bold text-sm">NSF</span>
-                </div>
-                <p className="text-sm font-medium text-gray-900">NSF Certified</p>
-                <p className="text-xs text-gray-500">Quality Assurance</p>
-              </div>
-
-              <div className="text-center">
-                <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-purple-600 font-bold text-sm">WADA</span>
-                </div>
-                <p className="text-sm font-medium text-gray-900">WADA Compliant</p>
-                <p className="text-xs text-gray-500">Anti-Doping</p>
-              </div>
-
-              <div className="text-center">
-                <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-orange-600 font-bold text-sm">ISO</span>
-                </div>
-                <p className="text-sm font-medium text-gray-900">ISO 9001</p>
-                <p className="text-xs text-gray-500">Quality Management</p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
