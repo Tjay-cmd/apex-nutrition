@@ -85,12 +85,14 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
           {featuredProducts.map((product) => (
             <div
               key={product.id}
-              className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-200/50 overflow-hidden hover:shadow-2xl hover:shadow-gray-500/20 hover:-translate-y-3 transition-all duration-500"
+              className="group relative rounded-2xl border border-gray-200/60 overflow-hidden hover:shadow-2xl hover:shadow-gray-500/20 hover:-translate-y-3 transition-all duration-500"
               onMouseEnter={() => setHoveredProduct(product.id)}
               onMouseLeave={() => setHoveredProduct(null)}
             >
+              {/* Top gradient header strip */}
+              <div className="h-2 w-full apex-gradient-card" />
               {/* Enhanced Product Image Container */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-white to-gray-50">
                 <Image
                   src={product.image_url || '/placeholder-product.jpg'}
                   alt={product.name}
@@ -120,10 +122,10 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
                   </Button>
                 </div>
 
-                {/* Enhanced Featured Badge */}
+                {/* Enhanced Featured Badge with new gradient */}
                 {product.featured && (
                   <div className="absolute top-4 left-4">
-                    <div className="bg-gradient-to-r from-apex-red to-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 shadow-lg">
+                    <div className="apex-gradient-card text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 shadow-lg">
                       <Star className="h-3 w-3" />
                       Featured
                     </div>
@@ -139,7 +141,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
               </div>
 
               {/* Enhanced Product Info */}
-              <div className="p-6">
+              <div className="p-6 bg-white/90">
                 <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-apex-red transition-colors duration-300 line-clamp-2">
                   {product.name}
                 </h4>

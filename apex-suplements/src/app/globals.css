@@ -70,6 +70,11 @@ body {
   background: linear-gradient(135deg, var(--performance-blue), var(--apex-red));
 }
 
+/* Brand gradient for badges/cards: red-dominant with subtle black tail */
+.apex-gradient-card {
+  background: linear-gradient(135deg, #e11d48 0%, #c5153f 58%, #231f20 100%);
+}
+
 /* Custom Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
