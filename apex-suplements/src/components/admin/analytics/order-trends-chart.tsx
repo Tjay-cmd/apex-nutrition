@@ -27,15 +27,16 @@ interface OrderTrendsChartProps {
 }
 
 const OrderTrendsChart: React.FC<OrderTrendsChartProps> = ({ data }) => {
+  const safeData = Array.isArray(data) ? data.filter(d => d && typeof d.value === 'number' && !isNaN(d.value)) : [];
   const chartData = {
-    labels: data.map(item => {
+    labels: safeData.map(item => {
       const date = new Date(item.date);
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }),
     datasets: [
       {
         label: 'Orders',
-        data: data.map(item => item.value),
+        data: safeData.map(item => item.value),
         backgroundColor: '#facc15',
         borderColor: '#e11d48',
         borderWidth: 1,
@@ -60,9 +61,12 @@ const OrderTrendsChart: React.FC<OrderTrendsChartProps> = ({ data }) => {
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
+        mode: 'index' as const,
+        intersect: false,
         callbacks: {
           label: function(context: any) {
-            return `Orders: ${context.parsed.y}`;
+            const y = context?.parsed?.y ?? 0;
+            return `Orders: ${Number(y).toLocaleString()}`;
           }
         }
       }

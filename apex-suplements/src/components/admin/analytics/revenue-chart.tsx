@@ -31,15 +31,16 @@ interface RevenueChartProps {
 }
 
 const RevenueChart: React.FC<RevenueChartProps> = ({ data }) => {
+  const safeData = Array.isArray(data) ? data.filter(d => d && typeof d.value === 'number' && !isNaN(d.value)) : [];
   const chartData = {
-    labels: data.map(item => {
+    labels: safeData.map(item => {
       const date = new Date(item.date);
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }),
     datasets: [
       {
         label: 'Revenue',
-        data: data.map(item => item.value),
+        data: safeData.map(item => item.value),
         borderColor: '#e11d48',
         backgroundColor: 'rgba(225, 29, 72, 0.1)',
         borderWidth: 2,
@@ -69,9 +70,12 @@ const RevenueChart: React.FC<RevenueChartProps> = ({ data }) => {
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
+        mode: 'index' as const,
+        intersect: false,
         callbacks: {
           label: function(context: any) {
-            return `Revenue: R${context.parsed.y.toLocaleString()}`;
+            const y = context?.parsed?.y ?? 0;
+            return `Revenue: R${Number(y).toLocaleString()}`;
           }
         }
       }
@@ -98,7 +102,8 @@ const RevenueChart: React.FC<RevenueChartProps> = ({ data }) => {
             size: 12
           },
           callback: function(value: any) {
-            return `R${value.toLocaleString()}`;
+            const v = Number(value ?? 0);
+            return `R${v.toLocaleString()}`;
           }
         }
       }
