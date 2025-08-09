@@ -24,7 +24,7 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-apex-red via-red-600 to-red-700">
+    <section className="py-20 apex-gradient-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Section Header */}
@@ -116,15 +116,16 @@ const NewsletterSignup = () => {
                     <Button
                       type="submit"
                       disabled={isLoading || !email}
-                      className="bg-white text-apex-red hover:bg-gray-100 font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="relative overflow-hidden bg-white text-apex-red hover:bg-[#c5153f] hover:text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-apex-red/30"
                     >
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-apex-red/15 to-transparent skew-x-[-12deg] animate-shine" />
                       {isLoading ? (
                         <div className="flex items-center gap-2">
                           <div className="w-4 h-4 border-2 border-apex-red border-t-transparent rounded-full animate-spin"></div>
                           Subscribing...
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2">
+                        <div className="relative z-10 flex items-center gap-2">
                           Subscribe
                           <ArrowRight className="h-4 w-4" />
                         </div>
