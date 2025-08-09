@@ -147,10 +147,36 @@ const AdminDashboard = () => {
               <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
               <p className="text-gray-600 mt-2">Welcome to the Apex Nutrition admin panel</p>
             </div>
-            <Button variant="outline" onClick={loadStats} disabled={loading} className="text-gray-600 hover:text-gray-800">
-              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-              Refresh
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={loadStats} disabled={loading} className="text-gray-600 hover:text-gray-800">
+                <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+              <Button
+                variant="outline"
+                onClick={async () => {
+                  const res = await fetch('/api/admin/test-sales/generate', { method: 'POST' });
+                  const data = await res.json();
+                  await loadStats();
+                  console.log('Generated test sales:', data);
+                }}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                Generate Test Sales
+              </Button>
+              <Button
+                variant="outline"
+                onClick={async () => {
+                  const res = await fetch('/api/admin/test-sales/clear', { method: 'POST' });
+                  const data = await res.json();
+                  await loadStats();
+                  console.log('Cleared test sales:', data);
+                }}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                Clear Test Sales
+              </Button>
+            </div>
           </div>
 
           {/* Stats Grid */}
