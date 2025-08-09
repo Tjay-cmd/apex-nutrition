@@ -120,41 +120,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-10 md:p-12">
-            <div className="text-center mb-10">
-              <div className="flex items-center justify-center mb-5">
-                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#e11d48] to-black mr-4" />
-                <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900">
-                Trust & Quality Assurance
-              </h3>
-                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#e11d48] to-black ml-4" />
-              </div>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                Our commitment to excellence is backed by industry‑leading certifications and partnerships
-              </p>
-            </div>
-
-            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
-              {([
-                { key: 'gmp', title: 'GMP Certified', caption: 'Manufacturing', Icon: BadgeCheck },
-                { key: 'nsf', title: 'NSF Certified', caption: 'Quality Assurance', Icon: AwardIcon },
-                { key: 'wada', title: 'WADA Compliant', caption: 'Anti-Doping', Icon: Shield },
-                { key: 'iso', title: 'ISO 9001', caption: 'Quality Management', Icon: ScrollText },
-              ] as { key: string; title: string; caption: string; Icon: React.ElementType }[]).map(({ key, title, caption, Icon }) => (
-                <div key={key} className="text-center">
-                  <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#e11d48] to-black text-white flex items-center justify-center mx-auto mb-3 shadow-lg">
-                    <div className="absolute inset-0 rounded-full overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full animate-shine" />
-                    </div>
-                    <Icon className="relative z-10 h-5 w-5 md:h-6 md:w-6 text-white" aria-hidden="true" />
-                  </div>
-                  <p className="text-sm font-semibold text-gray-900">{title}</p>
-                  <p className="text-xs text-gray-500">{caption}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Trimmed: removed duplicate trust badge section to reduce clutter */}
         </div>
       </section>
 
