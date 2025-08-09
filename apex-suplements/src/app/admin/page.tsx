@@ -6,10 +6,13 @@ import { BarChart3, Users, Package, ShoppingCart, TrendingUp, Settings, Shield, 
 import { Button } from '@/components/ui/button';
 import { getAnalyticsSummary, formatZAR } from '@/lib/firebase-queries';
 import type { AnalyticsSummary } from '@/types/analytics';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, addDoc, query as fsQuery, limit as fsLimit, where as fsWhere, deleteDoc, doc as fsDoc } from 'firebase/firestore';
 
 const AdminDashboard = () => {
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
   const [loading, setLoading] = useState(false);
+  const [testBusy, setTestBusy] = useState<'generate' | 'clear' | null>(null);
 
   const loadStats = async () => {
     setLoading(true);
@@ -73,6 +76,92 @@ const AdminDashboard = () => {
       },
     ];
   }, [summary]);
+
+  const generateTestSalesClient = async () => {
+    setTestBusy('generate');
+    try {
+      // pick first product
+      const productSnap = await getDocs(fsQuery(collection(db, 'products'), fsLimit(1)));
+      if (productSnap.empty) {
+        console.warn('No product found to generate test sales');
+        return;
+      }
+      const product = { id: productSnap.docs[0].id, ...(productSnap.docs[0].data() as any) };
+
+      const days = 7;
+      const totalToCreate = Math.floor(Math.random() * (20 - 14 + 1)) + 14; // 14..20
+      const rand = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+      const batchId = `test_${Date.now()}`;
+
+      for (let i = 0; i < totalToCreate; i++) {
+        const dayOffset = Math.floor(Math.random() * days);
+        const date = new Date();
+        date.setDate(date.getDate() - dayOffset);
+        date.setHours(12 + Math.floor(Math.random() * 12), Math.floor(Math.random() * 60), Math.floor(Math.random() * 60), 0);
+
+        const qty = Math.floor(Math.random() * 2) + 1;
+        const unitPrice = Number(product.price ?? 199);
+        const subtotal = unitPrice * qty;
+        const shipping = rand([0, 49]);
+        const tax = Math.round(subtotal * 0.15);
+        const total = subtotal + shipping + tax;
+
+        const status = rand(['delivered', 'shipped', 'processing', 'pending', 'cancelled']);
+        const payment = rand(['paid', 'paid', 'paid', 'pending', 'failed']);
+        const cities = ['Johannesburg', 'Cape Town', 'Durban', 'Pretoria', 'Port Elizabeth', 'Bloemfontein'];
+        const city = rand(cities);
+
+        await addDoc(collection(db, 'orders'), {
+          user_id: 'test_user',
+          customer_email: `test${Math.floor(Math.random() * 1000)}@example.com`,
+          customer_name: rand(['Alex Smith', 'Jordan Lee', 'Taylor Brown', 'Sam Mokoena', 'Nadia Patel']),
+          customer_phone: `+27 82 ${Math.floor(1000000 + Math.random() * 8999999)}`,
+          status,
+          payment_status: payment,
+          subtotal,
+          shipping_cost: shipping,
+          tax_amount: tax,
+          total_amount: total,
+          shipping_address: { street: '123 Main Rd', city, state: 'Gauteng', postal_code: '2000', country: 'South Africa' },
+          billing_address: { street: '123 Main Rd', city, state: 'Gauteng', postal_code: '2000', country: 'South Africa' },
+          items: [
+            {
+              id: '1',
+              product_id: product.id,
+              product_name: product.name ?? 'Test Product',
+              quantity: qty,
+              unit_price: unitPrice,
+              total_price: unitPrice * qty,
+            },
+          ],
+          status_history: [
+            { status: 'pending', updated_at: date.toISOString(), updated_by: 'system', notes: 'Order created' },
+          ],
+          created_at: date.toISOString(),
+          updated_at: date.toISOString(),
+          is_test: true,
+          test_batch_id: batchId,
+          created_with: 'admin_test',
+        });
+      }
+      await loadStats();
+    } finally {
+      setTestBusy(null);
+    }
+  };
+
+  const clearTestSalesClient = async () => {
+    setTestBusy('clear');
+    try {
+      const snap = await getDocs(fsQuery(collection(db, 'orders'), fsWhere('is_test', '==', true)));
+      for (const d of snap.docs) {
+        await deleteDoc(fsDoc(db, 'orders', d.id));
+      }
+      await loadStats();
+    } finally {
+      setTestBusy(null);
+    }
+  };
 
   const quickActions = [
     {
@@ -152,29 +241,11 @@ const AdminDashboard = () => {
                 <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
-              <Button
-                variant="outline"
-                onClick={async () => {
-                  const res = await fetch('/api/admin/test-sales/generate', { method: 'POST' });
-                  const data = await res.json();
-                  await loadStats();
-                  console.log('Generated test sales:', data);
-                }}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                Generate Test Sales
+              <Button variant="outline" onClick={generateTestSalesClient} disabled={!!testBusy} className="text-gray-600 hover:text-gray-800">
+                {testBusy === 'generate' ? 'Generating…' : 'Generate Test Sales'}
               </Button>
-              <Button
-                variant="outline"
-                onClick={async () => {
-                  const res = await fetch('/api/admin/test-sales/clear', { method: 'POST' });
-                  const data = await res.json();
-                  await loadStats();
-                  console.log('Cleared test sales:', data);
-                }}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                Clear Test Sales
+              <Button variant="outline" onClick={clearTestSalesClient} disabled={!!testBusy} className="text-gray-600 hover:text-gray-800">
+                {testBusy === 'clear' ? 'Clearing…' : 'Clear Test Sales'}
               </Button>
             </div>
           </div>
