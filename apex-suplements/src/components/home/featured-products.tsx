@@ -63,7 +63,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
   };
 
   return (
-    <section id="featured-products" className="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section id="featured-products" className="py-20 bg-gradient-to-b from-white via-[#fff5f7] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Enhanced Section Header */}
         <div className="text-center mb-16">
@@ -185,19 +185,17 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
 
         {/* Enhanced View All Products CTA */}
         <div className="text-center">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-200/50">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="apex-gradient-card rounded-2xl p-8 shadow-xl">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Explore Our Full Collection
             </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-red-100 mb-6 max-w-2xl mx-auto">
               Discover our complete range of premium supplements designed to support your fitness journey and performance goals.
             </p>
-            <Button
-              asChild
-              className="bg-gradient-to-r from-apex-red to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105"
-            >
-              <Link href="/shop">
-                View All Products
+            <Button asChild className="relative overflow-hidden bg-white text-apex-red hover:text-white hover:bg-[#c5153f] font-bold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-apex-red/30">
+              <Link href="/shop" className="inline-flex items-center justify-center">
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-apex-red/15 to-transparent skew-x-[-12deg] animate-shine" />
+                <span className="relative z-10">View All Products</span>
               </Link>
             </Button>
           </div>
