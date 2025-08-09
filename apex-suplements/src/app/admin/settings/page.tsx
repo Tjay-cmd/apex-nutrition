@@ -12,6 +12,7 @@ import {
   ChevronRight,
   Home
 } from 'lucide-react';
+import AdminNav from '@/components/admin/admin-nav';
 import { useSettings } from '@/contexts/settings-context';
 import { RoleGuard } from '@/components/auth/role-guard';
 import SettingsStatus from '@/components/admin/settings/settings-status';
@@ -138,15 +139,7 @@ const SettingsPageContent: React.FC = () => {
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-6">
-          {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
-            <a href="/admin" className="flex items-center hover:text-red-600 transition-colors">
-              <Home className="h-4 w-4 mr-1" />
-              Admin
-            </a>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-gray-900 font-medium">Settings</span>
-          </nav>
+          <AdminNav />
 
           {/* Page Header */}
           <div className="flex items-center justify-between">

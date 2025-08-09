@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { BarChart3, Users, Package, ShoppingCart, TrendingUp, Settings, Shield, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AdminNav from '@/components/admin/admin-nav';
 import { getAnalyticsSummary, formatZAR } from '@/lib/firebase-queries';
 import type { AnalyticsSummary } from '@/types/analytics';
 import { db } from '@/lib/firebase';
@@ -230,6 +231,8 @@ const AdminDashboard = () => {
     <RoleGuard allowedRoles={['admin', 'super_admin']}>
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Admin Navigation */}
+          <AdminNav />
           {/* Header */}
           <div className="mb-8 flex items-center justify-between">
             <div>
