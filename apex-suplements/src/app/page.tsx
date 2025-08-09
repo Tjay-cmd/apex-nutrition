@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Shield, Zap, Star, BadgeCheck, Award as AwardIcon, ScrollText } from 'lucide-react';
+import { Shield, Zap, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getFeaturedProducts, formatZAR } from '@/lib/firebase-queries';
 import HeroSlideshow from '@/components/home/hero-slideshow';
@@ -73,7 +73,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="text-center group">
               <div className="bg-apex-red/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Shield className="h-8 w-8 text-apex-red" />
+                <Star className="h-8 w-8 text-apex-red" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Premium Quality
@@ -97,7 +97,7 @@ export default async function HomePage() {
 
             <div className="text-center group">
               <div className="bg-apex-red/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Star className="h-8 w-8 text-apex-red" />
+                <Shield className="h-8 w-8 text-apex-red" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Athlete Trusted
