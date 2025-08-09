@@ -10,7 +10,8 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import dynamic from 'next/dynamic';
+const Bar = dynamic(() => import('react-chartjs-2').then(m => m.Bar), { ssr: false });
 import type { TimeSeriesData } from '@/types/analytics';
 
 ChartJS.register(

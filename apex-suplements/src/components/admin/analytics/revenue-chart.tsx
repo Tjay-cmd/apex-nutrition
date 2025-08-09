@@ -12,7 +12,8 @@ import {
   Legend,
   Filler
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import dynamic from 'next/dynamic';
+const Line = dynamic(() => import('react-chartjs-2').then(m => m.Line), { ssr: false });
 import type { TimeSeriesData } from '@/types/analytics';
 
 ChartJS.register(
