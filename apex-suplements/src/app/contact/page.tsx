@@ -191,7 +191,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
                     placeholder="Your full name"
                   />
                 </div>
@@ -208,7 +208,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -224,7 +224,7 @@ export default function ContactPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
                     placeholder="+27 82 940 2436"
                   />
                 </div>
@@ -240,7 +240,7 @@ export default function ContactPage() {
                     value={formData.category}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
                   >
                     <option value="">Select inquiry type</option>
                     <option value="product">Product Inquiry</option>
@@ -263,7 +263,7 @@ export default function ContactPage() {
                     name="priority"
                     value={formData.priority}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300"
                   >
                     <option value="standard">Standard</option>
                     <option value="urgent">Urgent</option>
@@ -283,7 +283,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-apex-red focus:border-transparent transition-all duration-300 resize-none"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
