@@ -73,7 +73,7 @@ const athletes: Athlete[] = [
 
 const AthletePartnerships = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-white via-[#fff5f7] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -92,7 +92,7 @@ const AthletePartnerships = () => {
 
         {/* Featured Partnership - Leopards Rugby */}
         <div className="mb-16">
-          <div className="bg-gradient-to-r from-apex-red to-red-600 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="apex-gradient-card rounded-3xl overflow-hidden shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Image Section */}
               <div className="relative h-64 lg:h-full">
@@ -141,13 +141,10 @@ const AthletePartnerships = () => {
                   </div>
                 </div>
 
-                <Button
-                  asChild
-                  variant="outline"
-                  className="bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 font-semibold py-3 px-6 rounded-xl transition-all duration-300"
-                >
-                  <Link href="/athletes">
-                    Learn More About Our Partnership
+                <Button asChild className="relative overflow-hidden bg-white text-apex-red hover:text-white hover:bg-[#c5153f] font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-apex-red/30">
+                  <Link href="/athletes" className="flex items-center justify-center">
+                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-apex-red/15 to-transparent skew-x-[-12deg] animate-shine" />
+                    <span className="relative z-10">Learn More About Our Partnership</span>
                   </Link>
                 </Button>
               </div>
