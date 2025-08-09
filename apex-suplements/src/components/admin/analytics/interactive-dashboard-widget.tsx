@@ -79,7 +79,7 @@ const InteractiveDashboardWidget: React.FC<InteractiveDashboardWidgetProps> = ({
 
     const interval = setInterval(() => {
       handleRefresh();
-    }, refreshInterval);
+    }, Math.max(10000, refreshInterval));
 
     return () => clearInterval(interval);
   }, [autoRefresh, refreshInterval]);

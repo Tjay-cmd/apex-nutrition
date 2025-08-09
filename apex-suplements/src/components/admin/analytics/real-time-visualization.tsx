@@ -53,7 +53,7 @@ const RealTimeVisualization: React.FC<RealTimeVisualizationProps> = ({
   data,
   realTimeMetrics,
   onDataUpdate,
-  updateInterval = 5000,
+  updateInterval = 15000,
   maxDataPoints = 50
 }) => {
   const [isLive, setIsLive] = useState(true);

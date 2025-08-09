@@ -384,7 +384,7 @@ export default function AnalyticsPage() {
                 description="Live revenue data with real-time updates and connection monitoring"
                 data={analyticsData.revenue.revenue_by_period}
                 realTimeMetrics={realTimeMetrics}
-                updateInterval={livePaused ? 0 : 5000}
+                updateInterval={livePaused ? 0 : 15000}
                 maxDataPoints={30}
               />
             </div>
