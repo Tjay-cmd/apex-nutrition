@@ -45,6 +45,7 @@ export default function AnalyticsPage() {
   const [filters, setFilters] = useState<AnalyticsFilters>({});
   const [error, setError] = useState<string | null>(null);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [livePaused, setLivePaused] = useState(false);
 
   const loadAnalyticsData = async () => {
     try {
@@ -71,6 +72,8 @@ export default function AnalyticsPage() {
     await loadAnalyticsData();
     setRefreshing(false);
   };
+
+  const toggleLive = () => setLivePaused(v => !v);
 
   const handleFiltersChange = (newFilters: AnalyticsFilters) => {
     setFilters(newFilters);
@@ -160,7 +163,7 @@ export default function AnalyticsPage() {
                   Comprehensive insights into your business performance
                 </p>
               </div>
-                             <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
                  <AdvancedDateSelector
                    filters={filters}
                    onFiltersChange={handleFiltersChange}
@@ -168,6 +171,13 @@ export default function AnalyticsPage() {
                    showRelativeDates={true}
                    showCustomPresets={true}
                  />
+              <Button
+                variant={livePaused ? 'outline' : 'default'}
+                onClick={toggleLive}
+                className={livePaused ? 'text-gray-600 hover:text-gray-800' : 'bg-green-600 hover:bg-green-700'}
+              >
+                {livePaused ? 'Resume Live' : 'Pause Live'}
+              </Button>
                  <Button
                    variant="outline"
                    onClick={handleRefresh}
@@ -374,7 +384,7 @@ export default function AnalyticsPage() {
                 description="Live revenue data with real-time updates and connection monitoring"
                 data={analyticsData.revenue.revenue_by_period}
                 realTimeMetrics={realTimeMetrics}
-                updateInterval={5000}
+                updateInterval={livePaused ? 0 : 5000}
                 maxDataPoints={30}
               />
             </div>
@@ -386,8 +396,8 @@ export default function AnalyticsPage() {
                 description="Interactive revenue chart with zoom and pan capabilities"
                 data={analyticsData.revenue.revenue_by_period}
                 type="line"
-                realTime={true}
-                refreshInterval={10000}
+                realTime={!livePaused}
+                refreshInterval={livePaused ? 0 : 10000}
                 onRefresh={handleRefresh}
                 onExport={() => console.log('Exporting revenue data')}
               />

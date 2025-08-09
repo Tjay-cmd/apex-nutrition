@@ -65,7 +65,7 @@ const RealTimeVisualization: React.FC<RealTimeVisualizationProps> = ({
 
   // Simulate real-time data updates
   useEffect(() => {
-    if (!isLive) {
+    if (!isLive || updateInterval === 0) {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
