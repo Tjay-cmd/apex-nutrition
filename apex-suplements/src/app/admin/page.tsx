@@ -1,53 +1,78 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { RoleGuard } from '@/components/auth/role-guard';
-import { BarChart3, Users, Package, ShoppingCart, TrendingUp, Settings, Shield } from 'lucide-react';
+import { BarChart3, Users, Package, ShoppingCart, TrendingUp, Settings, Shield, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getAnalyticsSummary, formatZAR } from '@/lib/firebase-queries';
+import type { AnalyticsSummary } from '@/types/analytics';
 
 const AdminDashboard = () => {
-  const stats = [
-    {
-      title: 'Total Revenue',
-      value: 'R 125,430',
-      change: '+12.5%',
-      changeType: 'positive',
-      icon: TrendingUp,
-      color: 'bg-apex-red',
-      bgColor: 'bg-red-50',
-      textColor: 'text-apex-red',
-    },
-    {
-      title: 'Total Orders',
-      value: '1,234',
-      change: '+8.2%',
-      changeType: 'positive',
-      icon: ShoppingCart,
-      color: 'bg-apex-gold',
-      bgColor: 'bg-yellow-50',
-      textColor: 'text-apex-gold',
-    },
-    {
-      title: 'Total Customers',
-      value: '5,678',
-      change: '+15.3%',
-      changeType: 'positive',
-      icon: Users,
-      color: 'bg-orange-500',
-      bgColor: 'bg-orange-50',
-      textColor: 'text-orange-600',
-    },
-    {
-      title: 'Total Products',
-      value: '89',
-      change: '+2.1%',
-      changeType: 'positive',
-      icon: Package,
-      color: 'bg-gray-800',
-      bgColor: 'bg-gray-50',
-      textColor: 'text-gray-800',
-    },
-  ];
+  const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const loadStats = async () => {
+    setLoading(true);
+    try {
+      const data = await getAnalyticsSummary({});
+      setSummary(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // initial load only; no auto-polling
+    loadStats();
+  }, []);
+
+  const stats = useMemo(() => {
+    const revenueValue = summary ? formatZAR(summary.revenue.total_revenue) : '—';
+    const revenueChange = summary ? `${summary.revenue.revenue_growth_rate >= 0 ? '+' : ''}${summary.revenue.revenue_growth_rate.toFixed(1)}%` : '—';
+
+    const totalOrders = summary ? summary.orders.total_orders.toLocaleString() : '—';
+    const ordersChange = summary ? `${summary.orders.order_completion_rate.toFixed(1)}% completion` : '—';
+
+    const totalCustomers = summary ? summary.customers.total_customers.toLocaleString() : '—';
+    const customersChange = summary ? `${summary.customers.customer_acquisition_rate.toFixed(1)}% acquisition` : '—';
+
+    const totalProducts = summary ? summary.products.total_products.toLocaleString() : '—';
+
+    return [
+      {
+        title: 'Total Revenue',
+        value: revenueValue,
+        change: revenueChange,
+        changeType: summary && summary.revenue.revenue_growth_rate >= 0 ? 'positive' : 'negative',
+        icon: TrendingUp,
+        textColor: 'text-apex-red',
+      },
+      {
+        title: 'Total Orders',
+        value: totalOrders,
+        change: ordersChange,
+        changeType: 'neutral',
+        icon: ShoppingCart,
+        textColor: 'text-apex-gold',
+      },
+      {
+        title: 'Total Customers',
+        value: totalCustomers,
+        change: customersChange,
+        changeType: 'neutral',
+        icon: Users,
+        textColor: 'text-orange-600',
+      },
+      {
+        title: 'Total Products',
+        value: totalProducts,
+        change: summary ? `${Object.values(summary.products.products_by_category || {}).reduce((a: number, b: any) => a + (typeof b === 'number' ? b : 0), 0) || totalProducts} total` : '—',
+        changeType: 'neutral',
+        icon: Package,
+        textColor: 'text-gray-800',
+      },
+    ];
+  }, [summary]);
 
   const quickActions = [
     {
@@ -117,9 +142,15 @@ const AdminDashboard = () => {
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Welcome to the Apex Nutrition admin panel</p>
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-gray-600 mt-2">Welcome to the Apex Nutrition admin panel</p>
+            </div>
+            <Button variant="outline" onClick={loadStats} disabled={loading} className="text-gray-600 hover:text-gray-800">
+              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </Button>
           </div>
 
           {/* Stats Grid */}
@@ -133,9 +164,9 @@ const AdminDashboard = () => {
                       <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                       <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
                       <p className={`text-sm mt-1 font-medium ${
-                        stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                        stat.changeType === 'positive' ? 'text-green-600' : stat.changeType === 'negative' ? 'text-red-600' : 'text-gray-600'
                       }`}>
-                        {stat.change} from last month
+                        {stat.change}
                       </p>
                     </div>
                     <div className="p-3">
