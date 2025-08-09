@@ -169,21 +169,22 @@ const ProductQuiz = () => {
   };
 
   const handleAnswer = (answer: string) => {
-    const newAnswers = [...answers];
-    const questionIndex = newAnswers.findIndex(a => a.question === questions[currentStep].question);
+    const stepIndex = Math.max(0, currentStep - 1);
+    const questionText = questions[stepIndex].question;
 
-    if (questionIndex >= 0) {
-      newAnswers[questionIndex].answer = answer;
+    const newAnswers = [...answers];
+    const existingIndex = newAnswers.findIndex(a => a.question === questionText);
+
+    if (existingIndex >= 0) {
+      newAnswers[existingIndex].answer = answer;
     } else {
-      newAnswers.push({
-        question: questions[currentStep].question,
-        answer
-      });
+      newAnswers.push({ question: questionText, answer });
     }
 
     setAnswers(newAnswers);
 
-    if (currentStep < questions.length - 1) {
+    // Advance to next question, or show results if we just answered the last one
+    if (currentStep < questions.length) {
       setCurrentStep(currentStep + 1);
     } else {
       setShowResults(true);
@@ -299,19 +300,19 @@ const ProductQuiz = () => {
             </div>
 
             {/* Progress Bar */}
-            <div className="mb-8">
+            <div className="mb-8" role="progressbar" aria-valuenow={Math.round((Math.min(currentStep, questions.length) / questions.length) * 100)} aria-valuemin={0} aria-valuemax={100}>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-medium text-gray-700">
-                  Question {currentStep} of {questions.length}
+                  Question {Math.min(currentStep, questions.length)} of {questions.length}
                 </span>
                 <span className="text-sm text-gray-500">
-                  {Math.round((currentStep / questions.length) * 100)}% Complete
+                  {Math.round((Math.min(currentStep, questions.length) / questions.length) * 100)}% Complete
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
                   className="bg-gradient-to-r from-apex-red to-red-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(currentStep / questions.length) * 100}%` }}
+                  style={{ width: `${(Math.min(currentStep, questions.length) / questions.length) * 100}%` }}
                 />
               </div>
             </div>
@@ -319,11 +320,11 @@ const ProductQuiz = () => {
             {/* Current Question */}
             <div className="bg-white rounded-2xl border border-gray-200/50 p-8 shadow-xl">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                {questions[currentStep - 1].question}
+                {questions[Math.max(0, currentStep - 1)].question}
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {questions[currentStep - 1].options.map((option) => (
+                {questions[Math.max(0, currentStep - 1)].options.map((option) => (
                   <button
                     key={option.value}
                     onClick={() => handleAnswer(option.value)}
