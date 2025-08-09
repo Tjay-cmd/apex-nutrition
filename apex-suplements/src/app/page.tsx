@@ -29,16 +29,15 @@ interface Product {
 async function getFeaturedProductsData(): Promise<Product[]> {
   try {
     const products = await getFeaturedProducts();
-    return products
-      .filter((product: any) => product.status === 'active' && product.featured)
-      .map((product: any) => ({
+    // Backend already filters by featured; do not drop items if status is missing
+    return products.map((product: any) => ({
         id: product.id,
         name: product.name || '',
         description: product.description || '',
         price: product.price || 0,
         category: product.category || '',
-        status: product.status || 'inactive',
-        featured: product.featured || false,
+        status: product.status || 'active',
+        featured: product.featured || true,
         stock: product.stock || 0,
         image_url: product.image_url
       })) as Product[];

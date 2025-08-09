@@ -121,7 +121,7 @@ const ProductDetailPage = () => {
             {/* Image Gallery */}
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100">
+              <div className="relative w-full max-w-[520px] aspect-[3/4] overflow-hidden rounded-xl bg-gray-100 mx-auto">
                 <Image
                   src={selectedImage === 'main'
                     ? (product.image_url || '/placeholder-product.jpg')
@@ -130,7 +130,7 @@ const ProductDetailPage = () => {
                   alt={product.name}
                   fill
                   className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = '/placeholder-product.jpg';
